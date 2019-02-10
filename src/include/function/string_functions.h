@@ -28,7 +28,7 @@ class ExecutorContext;
 
 namespace type {
 class AbstractPool;
-}  // namespace type;
+}  // namespace type
 
 namespace function {
 
@@ -85,6 +85,15 @@ class StringFunctions {
   static uint32_t Length(executor::ExecutorContext &ctx, const char *str,
                          uint32_t length);
 
+  static StrWithLen Upper(executor::ExecutorContext &ctx, const char *str,
+                          const uint32_t length);
+
+  static StrWithLen *Lower(executor::ExecutorContext &ctx, const char *str,
+                           const uint32_t length);
+  /*
+      static StrWithLen Concat(executor::ExecutorContext &ctx, const char
+      **concat_strs, const uint32_t* lengths);
+    */
   /**
    * Compare two (potentially empty) strings returning an integer value
    * indicating their sort order.

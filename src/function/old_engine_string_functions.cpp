@@ -226,8 +226,16 @@ type::Value OldEngineStringFunctions::Length(
 }
 
 type::Value OldEngineStringFunctions::Upper(
-    UNUSED_ATTRIBUTE const std::vector<type::Value> &args) {
-  throw Exception{"Upper not implemented in old engine"};
+    const std::vector<type::Value> &args) {
+  /*
+  executor::ExecutorContext ctx{nullptr};
+  auto ret = StringFunctions::Upper(ctx, args.at(0).GetData(),
+                                    strlen(args.at(0).GetData()) + 1);*/
+
+  std::string str = args.at(0).ToString();
+  std::string ret = StringUtil::Upper(str);
+
+  return type::ValueFactory::GetVarcharValue(ret);
 }
 
 type::Value OldEngineStringFunctions::Lower(

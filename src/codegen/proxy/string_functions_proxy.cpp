@@ -34,6 +34,7 @@ DEFINE_METHOD(peloton::function, StringFunctions, Repeat);
 DEFINE_METHOD(peloton::function, StringFunctions, CompareStrings);
 DEFINE_METHOD(peloton::function, StringFunctions, WriteString);
 DEFINE_METHOD(peloton::function, StringFunctions, InputString);
+DEFINE_METHOD(peloton::function, StringFunctions, Upper);
 
 }  // namespace codegen
 }  // namespace peloton

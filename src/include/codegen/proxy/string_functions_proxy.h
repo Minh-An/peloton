@@ -32,10 +32,11 @@ PROXY(StringFunctions) {
   DECLARE_METHOD(CompareStrings);
   DECLARE_METHOD(WriteString);
   DECLARE_METHOD(InputString);
+  DECLARE_METHOD(Upper);
 };
 
 PROXY(StrWithLen) {
-  DECLARE_MEMBER(0, char*, str);
+  DECLARE_MEMBER(0, char *, str);
   DECLARE_MEMBER(1, uint32_t, length);
   DECLARE_TYPE;
 };

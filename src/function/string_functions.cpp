@@ -14,8 +14,8 @@
 
 #include "common/macros.h"
 #include "executor/executor_context.h"
-#include "type/type_util.h"
 #include "type/abstract_pool.h"
+#include "type/type_util.h"
 
 namespace peloton {
 namespace function {
@@ -149,7 +149,6 @@ StringFunctions::StrWithLen StringFunctions::LTrim(
 
   str_len -= 1;
   int tail = str_len - 1, head = 0;
-
   while (head < (int)str_len && strchr(from, str[head]) != nullptr) {
     head++;
   }
@@ -221,6 +220,41 @@ uint32_t StringFunctions::Length(
   PELOTON_ASSERT(str != nullptr);
   return length;
 }
+
+StringFunctions::StrWithLen StringFunctions::Upper(
+    executor::ExecutorContext &ctx, const char *str, const uint32_t length) {
+  auto *pool = ctx.GetPool();
+  auto *upper_str = reinterpret_cast<char *>(pool->Allocate(length));
+
+  PELOTON_MEMCPY(upper_str, str, length);
+  char *ptr = upper_str;
+  for (uint32_t i = 0; i < length - 1; i++) {
+    *ptr = toupper(*ptr);
+    ptr++;
+  }
+  return StringFunctions::StrWithLen{upper_str, length};
+}
+
+StringFunctions::StrWithLen StringFunctions::Lower(
+    executor::ExecutorContext &ctx, const char *str, const uint32_t length) {
+  auto *pool = ctx.GetPool();
+  auto *upper_str = reinterpret_cast<char *>(pool->Allocate(length));
+
+  PELOTON_MEMCPY(upper_str, str, length);
+  char *ptr = upper_str;
+  for (uint32_t i = 0; i < length - 1; i++) {
+    *ptr = tolower(*ptr);
+    ptr++;
+  }
+  return StringFunctions::StrWithLen{upper_str, length};
+}
+/*
+StrWithLen StringFunctions::Concat(executor::ExecutorContext &ctx,
+                                   const char **concat_strs,
+                                   const uint32_t *lengths) {
+  return null;
+}
+*/
 
 int32_t StringFunctions::CompareStrings(const char *str1, uint32_t len1,
                                         const char *str2, uint32_t len2) {
